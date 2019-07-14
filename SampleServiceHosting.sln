@@ -3,9 +3,14 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26124.0
 MinimumVisualStudioVersion = 15.0.26124.0
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "sample_service_hosting", "sample_service_hosting\sample_service_hosting.csproj", "{B884F59E-CF3F-41FF-B694-5D2849ED587D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "sample_service_daemon", "sample_service_daemon\sample_service_daemon.csproj", "{1FA2585D-BF93-4C2C-BE24-66C37E738944}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "sample_service", "sample_service\sample_service.csproj", "{0D470833-33F1-4688-BD50-4DFD58FA1A8E}"
 EndProject
 Global
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Debug|x64 = Debug|x64
@@ -14,21 +19,30 @@ Global
 		Release|x64 = Release|x64
 		Release|x86 = Release|x86
 	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
-	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{B884F59E-CF3F-41FF-B694-5D2849ED587D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B884F59E-CF3F-41FF-B694-5D2849ED587D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B884F59E-CF3F-41FF-B694-5D2849ED587D}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{B884F59E-CF3F-41FF-B694-5D2849ED587D}.Debug|x64.Build.0 = Debug|Any CPU
-		{B884F59E-CF3F-41FF-B694-5D2849ED587D}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{B884F59E-CF3F-41FF-B694-5D2849ED587D}.Debug|x86.Build.0 = Debug|Any CPU
-		{B884F59E-CF3F-41FF-B694-5D2849ED587D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B884F59E-CF3F-41FF-B694-5D2849ED587D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B884F59E-CF3F-41FF-B694-5D2849ED587D}.Release|x64.ActiveCfg = Release|Any CPU
-		{B884F59E-CF3F-41FF-B694-5D2849ED587D}.Release|x64.Build.0 = Release|Any CPU
-		{B884F59E-CF3F-41FF-B694-5D2849ED587D}.Release|x86.ActiveCfg = Release|Any CPU
-		{B884F59E-CF3F-41FF-B694-5D2849ED587D}.Release|x86.Build.0 = Release|Any CPU
+		{1FA2585D-BF93-4C2C-BE24-66C37E738944}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1FA2585D-BF93-4C2C-BE24-66C37E738944}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1FA2585D-BF93-4C2C-BE24-66C37E738944}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{1FA2585D-BF93-4C2C-BE24-66C37E738944}.Debug|x64.Build.0 = Debug|Any CPU
+		{1FA2585D-BF93-4C2C-BE24-66C37E738944}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{1FA2585D-BF93-4C2C-BE24-66C37E738944}.Debug|x86.Build.0 = Debug|Any CPU
+		{1FA2585D-BF93-4C2C-BE24-66C37E738944}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1FA2585D-BF93-4C2C-BE24-66C37E738944}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1FA2585D-BF93-4C2C-BE24-66C37E738944}.Release|x64.ActiveCfg = Release|Any CPU
+		{1FA2585D-BF93-4C2C-BE24-66C37E738944}.Release|x64.Build.0 = Release|Any CPU
+		{1FA2585D-BF93-4C2C-BE24-66C37E738944}.Release|x86.ActiveCfg = Release|Any CPU
+		{1FA2585D-BF93-4C2C-BE24-66C37E738944}.Release|x86.Build.0 = Release|Any CPU
+		{0D470833-33F1-4688-BD50-4DFD58FA1A8E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0D470833-33F1-4688-BD50-4DFD58FA1A8E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0D470833-33F1-4688-BD50-4DFD58FA1A8E}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{0D470833-33F1-4688-BD50-4DFD58FA1A8E}.Debug|x64.Build.0 = Debug|Any CPU
+		{0D470833-33F1-4688-BD50-4DFD58FA1A8E}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{0D470833-33F1-4688-BD50-4DFD58FA1A8E}.Debug|x86.Build.0 = Debug|Any CPU
+		{0D470833-33F1-4688-BD50-4DFD58FA1A8E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0D470833-33F1-4688-BD50-4DFD58FA1A8E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0D470833-33F1-4688-BD50-4DFD58FA1A8E}.Release|x64.ActiveCfg = Release|Any CPU
+		{0D470833-33F1-4688-BD50-4DFD58FA1A8E}.Release|x64.Build.0 = Release|Any CPU
+		{0D470833-33F1-4688-BD50-4DFD58FA1A8E}.Release|x86.ActiveCfg = Release|Any CPU
+		{0D470833-33F1-4688-BD50-4DFD58FA1A8E}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
