@@ -9,6 +9,8 @@ namespace VSC.Services
 {
     public class SampleService : IHostedService, IDisposable
     {
+        private CancellationTokenSource _cancellationTokenSource;
+        private Task _executingTask;
         IApplicationLifetime _appLifetime;
         ILogger<SampleService> _logger;
         IHostingEnvironment _environment;
@@ -40,14 +42,29 @@ namespace VSC.Services
             _appLifetime.ApplicationStopping.Register(OnStopping);
             _appLifetime.ApplicationStopped.Register(OnStopped);
 
+            _cancellationTokenSource = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
+            _executingTask = Run(_cancellationTokenSource.Token);
+
             return Task.CompletedTask;
         }
 
-        public Task StopAsync(CancellationToken cancellationToken)
+        public async Task StopAsync(CancellationToken cancellationToken)
         {
             _logger.LogTrace("SampleService StopAsync method called.");
-            
-            return Task.CompletedTask;
+
+            // Stop called without start
+            if (_executingTask == null)
+            {
+                return;
+            }
+
+            // stop service processes here
+            _cancellationTokenSource.Cancel();
+
+            _logger.LogInformation("Sample Service stopped.");
+
+            // Wait until the task completes or the stop token triggers
+            await Task.WhenAny(_executingTask, Task.Delay(-1, cancellationToken));
         }
 
         private void OnStarted()
@@ -69,6 +86,21 @@ namespace VSC.Services
             _logger.LogTrace("SampleService OnStopped method called.");
 
             // Post-stopped code goes here
+        }
+
+        private async Task Run(CancellationToken cancellationToken)
+        {
+            _logger.LogTrace("Starting iteration count Run");
+
+            int iterationCount = 0;
+            while (!cancellationToken.IsCancellationRequested)
+            {
+                iterationCount++;
+
+                _logger.LogInformation(string.Format("Running round {0}", iterationCount));
+
+                await Task.Delay(TimeSpan.FromSeconds(10), cancellationToken);
+            }
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -9,13 +10,13 @@ namespace VSC
 {
     class Program
     {
-        static void Main(string[] args)
+        static async Task Main(string[] args)
         {
             IHostBuilder hostBuilder = CreateHostBuilder(args);
             if(hostBuilder != null)
             {
                 IHost host = hostBuilder.Build();
-                host.RunAsync();
+                await host.RunAsync();
             }
         }
 
