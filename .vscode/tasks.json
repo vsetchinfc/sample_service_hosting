@@ -7,7 +7,7 @@
             "type": "process",
             "args": [
                 "build",
-                "${workspaceFolder}/sample_service_hosting/sample_service_hosting.csproj"
+                "${workspaceFolder}/sample_service_daemon/sample_service_daemon.csproj"
             ],
             "problemMatcher": "$msCompile"
         }
