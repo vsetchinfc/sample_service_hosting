@@ -92,6 +92,8 @@ namespace VSC.Services
         {
             _logger.LogTrace("Starting iteration count Run");
 
+            await Task.Delay(TimeSpan.FromMilliseconds(100), cancellationToken);
+
             int iterationCount = 0;
             while (!cancellationToken.IsCancellationRequested)
             {
