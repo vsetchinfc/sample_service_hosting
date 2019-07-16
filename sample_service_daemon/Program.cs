@@ -9,7 +9,7 @@ using NLog.Extensions.Hosting;
 namespace VSC
 {
     class Program
-    {
+    {   
         static async Task Main(string[] args)
         {
             IHostBuilder hostBuilder = CreateHostBuilder(args);
@@ -48,7 +48,6 @@ namespace VSC
                     })
                     .ConfigureLogging((hostingContext, logging) => 
                     {
-                        logging.ClearProviders();
                         logging.AddConfiguration(hostingContext.Configuration.GetSection("Logging"));
                         logging.AddConsole();
                     });
