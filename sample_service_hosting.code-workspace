@@ -1,7 +1,14 @@
 {
-	"folders": [
+    "folders": [
 		{
-			"path": "."
+			"path": "vscutils/vscutils"
+		},
+		{
+			"path": "vscutils/vscutils.tests"
+		},
+		{
+			"path": "sample_service_hosting"
 		}
-	]
+	],
+    "settings": {}
 }
