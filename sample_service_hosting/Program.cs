@@ -12,6 +12,8 @@ namespace VSC
     {   
         static async Task Main(string[] args)
         {
+            ArgsParser hostAction = new ArgsParser(args);
+
             IHostBuilder hostBuilder = CreateHostBuilder(args);
             if(hostBuilder != null)
             {
