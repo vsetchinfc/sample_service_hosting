@@ -7,7 +7,7 @@
             "type": "process",
             "args": [
                 "build",
-                "${workspaceFolder}/sample_service_daemon.csproj"
+                "${workspaceFolder}/sample_service_hosting.csproj"
             ],
             "problemMatcher": "$tsc"
         },
@@ -17,7 +17,7 @@
             "type": "process",
             "args": [
                 "publish",
-                "${workspaceFolder}/sample_service_daemon.csproj"
+                "${workspaceFolder}/sample_service_hosting.csproj"
             ],
             "problemMatcher": "$tsc"
         },
@@ -28,7 +28,7 @@
             "args": [
                 "watch",
                 "run",
-                "${workspaceFolder}/sample_service_daemon.csproj"
+                "${workspaceFolder}/sample_service_hosting.csproj"
             ],
             "problemMatcher": "$tsc"
         }

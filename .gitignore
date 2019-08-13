@@ -8,6 +8,7 @@ vscdatabase
 build
 internal-nlog.txt
 coverage_report
+vscutils
 
 .DS_Store
 node_modules/

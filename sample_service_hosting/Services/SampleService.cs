@@ -11,22 +11,22 @@ namespace VSC.Services
     {
         private CancellationTokenSource _cancellationTokenSource;
         private Task _executingTask;
-        IApplicationLifetime _appLifetime;
+        // IApplicationLifetime _appLifetime;
         ILogger<SampleService> _logger;
-        IHostingEnvironment _environment;
-        IConfiguration _configuration;
+        // IHostingEnvironment _environment;
+        // IConfiguration _configuration;
 
         public SampleService(
-            IConfiguration configuration,
-            IHostingEnvironment environment,
-            ILogger<SampleService> logger, 
-            IApplicationLifetime appLifetime
+            // IConfiguration configuration,
+            // IHostingEnvironment environment,
+            ILogger<SampleService> logger//, 
+            // IApplicationLifetime appLifetime
         )
         {
-            _configuration = configuration;
-            _environment = environment;
+            // _configuration = configuration;
+            // _environment = environment;
             _logger = logger;
-            _appLifetime = appLifetime;
+            // _appLifetime = appLifetime;
         }
 
         public void Dispose()
@@ -38,9 +38,9 @@ namespace VSC.Services
         {
             _logger.LogTrace("SampleService StartAsync method called.");
 
-            _appLifetime.ApplicationStarted.Register(OnStarted);
-            _appLifetime.ApplicationStopping.Register(OnStopping);
-            _appLifetime.ApplicationStopped.Register(OnStopped);
+            // _appLifetime.ApplicationStarted.Register(OnStarted);
+            // _appLifetime.ApplicationStopping.Register(OnStopping);
+            // _appLifetime.ApplicationStopped.Register(OnStopped);
 
             _cancellationTokenSource = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
             _executingTask = Run(_cancellationTokenSource.Token);
@@ -67,26 +67,26 @@ namespace VSC.Services
             await Task.WhenAny(_executingTask, Task.Delay(-1, cancellationToken));
         }
 
-        private void OnStarted()
-        {
-            _logger.LogTrace("SampleService OnStarted method called.");
+        // private void OnStarted()
+        // {
+        //     _logger.LogTrace("SampleService OnStarted method called.");
 
-            // Post-startup code goes here
-        }
+        //     // Post-startup code goes here
+        // }
 
-        private void OnStopping()
-        {
-            _logger.LogTrace("SampleService OnStopping method called.");
+        // private void OnStopping()
+        // {
+        //     _logger.LogTrace("SampleService OnStopping method called.");
 
-            // On-stopping code goes here
-        }
+        //     // On-stopping code goes here
+        // }
 
-        private void OnStopped()
-        {
-            _logger.LogTrace("SampleService OnStopped method called.");
+        // private void OnStopped()
+        // {
+        //     _logger.LogTrace("SampleService OnStopped method called.");
 
-            // Post-stopped code goes here
-        }
+        //     // Post-stopped code goes here
+        // }
 
         private async Task Run(CancellationToken cancellationToken)
         {
