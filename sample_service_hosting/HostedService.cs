@@ -28,18 +28,18 @@ namespace VSC
                 
                 if(builder == null) return;
 
-                //WinServiceInstaller.APP_EXECUTABLE_PATH = Utility.GetExecutingAssemblyLocation().Remove(Utility.GetExecutingAssemblyLocation().Length - 4) + ".exe";
+                WinServiceInstaller.APP_EXECUTABLE_PATH = "a.exe"; // Utility.GetExecutingAssemblyLocation().Remove(Utility.GetExecutingAssemblyLocation().Length - 4) + ".exe";
                 
                 switch (_argsParser.GetHostAction())
                 {
                     case HostAction.InstallWinService:
                     {
-                        //WinServiceInstaller.Install(WinService.WinServiceName);
+                        WinServiceInstaller.Install(WinService.WinServiceName);
                     }
                     break;
                     case HostAction.UninstallWinService:
                     {
-                        //WinServiceInstaller.Uninstall(WinService.WinServiceName);
+                        WinServiceInstaller.Uninstall(WinService.WinServiceName);
                     }
                     break;
                     case HostAction.RunWinService:

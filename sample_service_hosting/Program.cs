@@ -1,10 +1,4 @@
-﻿using System.IO;
-using System.Threading.Tasks;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using NLog.Extensions.Hosting;
+﻿using System.Threading.Tasks;
 
 namespace VSC
 {
@@ -12,9 +6,9 @@ namespace VSC
     {   
         static async Task Main(string[] args)
         {
-            ArgsParser hostAction = new ArgsParser(args);
+            ArgsParser argsParser = new ArgsParser(args);
 
-            HostedService service = new HostedService(hostAction);
+            HostedService service = new HostedService(argsParser);
             await service.Run(args);
         }
     }
