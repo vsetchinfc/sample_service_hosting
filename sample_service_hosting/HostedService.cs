@@ -28,7 +28,7 @@ namespace VSC
                 
                 if(builder == null) return;
 
-                WinServiceInstaller.APP_EXECUTABLE_PATH = "a.exe"; // Utility.GetExecutingAssemblyLocation().Remove(Utility.GetExecutingAssemblyLocation().Length - 4) + ".exe";
+                WinServiceInstaller.APP_EXECUTABLE_PATH = Utility.GetExecutingAssemblyLocation().Remove(Utility.GetExecutingAssemblyLocation().Length - 4) + ".exe";
                 
                 switch (_argsParser.GetHostAction())
                 {
@@ -44,15 +44,15 @@ namespace VSC
                     break;
                     case HostAction.RunWinService:
                     {
-                        // try
-                        // {
-                        //     await builder.RunAsWindowsServiceAsync();
-                        // }
-                        // catch(Exception ex)
-                        // {
-                        //     _logger.Error("Could not start as windows service. " + ex.Message);
-                        //     ShowUsage();
-                        // }
+                        try
+                        {
+                            await builder.RunAsWindowsServiceAsync();
+                        }
+                        catch(Exception ex)
+                        {
+                            _logger.Error("Could not start as windows service. " + ex.Message);
+                            ShowUsage();
+                        }
                     }
                     break;
                     case HostAction.RunConsole:
@@ -92,12 +92,13 @@ namespace VSC
 
         private void ShowUsage()
         {   
-            //Console.WriteLine(string.Format("{0}", WinService.WinServiceName));
+            Console.WriteLine(string.Format("{0} [options]", WinService.WinServiceName));
             Console.WriteLine("Options:\n" 
+                        + "  'no options'\tStart as Windows Service\n"
                         + "  -i\t\tInstall as Windows Service\n"
                         + "  -u\t\tUninstall Windows Service\n"
                         + "  -console\tRun as console app\n"
-                        + "  -daemon\t Run as Linux daemon service\n"
+                        + "  -daemon\tRun as Linux daemon service\n"
                         + "  -h\t\tShow command line switch help\n");
         }
         private IHostBuilder CreateHostBuilder(string[] args)
