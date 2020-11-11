@@ -4,12 +4,13 @@ namespace VSC
 {
     public static class WinServiceInstaller
     {
-        private static NLog.Logger _logger = NLog.LogManager.GetCurrentClassLogger();
+        private static NLog.Logger _logger
+            = NLog.LogManager.GetCurrentClassLogger();
 
         public static string APP_EXECUTABLE_PATH = string.Empty;
         private const string ServiceControllerEXE = "sc.exe";
 
-        public delegate void WinServiceStatusHandler (string status);
+        public delegate void WinServiceStatusHandler(string status);
         public static event WinServiceStatusHandler WinServiceStatus;
 
         public static void Uninstall(string serviceName)
@@ -25,28 +26,31 @@ namespace VSC
         {
             RaiseWinServiceStatus("Stopping Service");
 
-            RunProcess(string.Format("stop \"{0}\"", serviceName));            
+            RunProcess(string.Format("stop \"{0}\"", serviceName));
         }
 
         public static void Install(string serviceName)
         {
-            if(!string.IsNullOrEmpty(APP_EXECUTABLE_PATH))
+            if (!string.IsNullOrEmpty(APP_EXECUTABLE_PATH))
             {
                 RaiseWinServiceStatus("Install Service");
 
-                string processArguments = string.Format("create \"{0}\" displayname= \"{1}\" binpath= \"{2}\"", serviceName, serviceName, APP_EXECUTABLE_PATH);
-                
+                string processArguments = string.Format(
+                    "create \"{0}\" displayname= \"{1}\" binpath= \"{2}\"",
+                    serviceName, serviceName, APP_EXECUTABLE_PATH);
+
                 RunProcess(processArguments);
             }
             else
             {
-                _logger.Error("Cannot install service. Path to exe cannot be empty.");
+                _logger.Error(
+                    "Cannot install service. Path to exe cannot be empty.");
             }
         }
 
         private static void RaiseWinServiceStatus(string status)
         {
-            if(WinServiceStatus != null)
+            if (WinServiceStatus != null)
             {
                 WinServiceStatus(status);
             }
@@ -58,7 +62,8 @@ namespace VSC
 
             var process = new Process();
             var processInfo = new ProcessStartInfo();
-            processInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+            processInfo.WindowStyle
+                = System.Diagnostics.ProcessWindowStyle.Hidden;
             processInfo.FileName = ServiceControllerEXE;
             processInfo.Arguments = arguments;
             process.StartInfo = processInfo;

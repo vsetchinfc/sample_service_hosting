@@ -7,14 +7,23 @@ namespace VSC
 {
     public static class WinServiceExtensions
     {
-        internal static IHostBuilder UseServiceBaseLifetime(this IHostBuilder hostBuilder)
+        internal static IHostBuilder UseServiceBaseLifetime
+        (
+            this IHostBuilder hostBuilder
+        )
         {
-            return hostBuilder.ConfigureServices((hostContext, services) => services.AddSingleton<IHostLifetime, WinService>());
+            return hostBuilder.ConfigureServices((hostContext, services) =>
+                services.AddSingleton<IHostLifetime, WinService>());
         }
 
-        public static Task RunAsWindowsServiceAsync(this IHostBuilder hostBuilder, CancellationToken cancellationToken = default)
+        public static Task RunAsWindowsServiceAsync
+        (
+            this IHostBuilder hostBuilder,
+            CancellationToken cancellationToken = default
+        )
         {
-            return hostBuilder.UseServiceBaseLifetime().Build().RunAsync(cancellationToken);
+            return hostBuilder.UseServiceBaseLifetime()
+                .Build().RunAsync(cancellationToken);
         }
     }
 }

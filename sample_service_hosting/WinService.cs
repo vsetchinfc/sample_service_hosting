@@ -9,7 +9,8 @@ namespace VSC
     public class WinService : ServiceBase, IHostLifetime
     {
         public static string WinServiceName = "Default Service Name";
-        private readonly TaskCompletionSource<object> _delayStart = new TaskCompletionSource<object>();
+        private readonly TaskCompletionSource<object> _delayStart
+            = new TaskCompletionSource<object>();
 
         private IApplicationLifetime ApplicationLifetime { get; }
 
@@ -17,15 +18,17 @@ namespace VSC
         {
             this.ServiceName = WinServiceName;
 
-            ApplicationLifetime = applicationLifetime ?? throw new ArgumentNullException(nameof(applicationLifetime));
-        }        
+            ApplicationLifetime = applicationLifetime ??
+                throw new ArgumentNullException(nameof(applicationLifetime));
+        }
 
         public void Start()
         {
             try
             {
                 Run(this); // This blocks until the service is stopped.
-                _delayStart.TrySetException(new InvalidOperationException("Stopped without starting"));
+                _delayStart.TrySetException(
+                    new InvalidOperationException("Stopped without starting"));
             }
             catch (Exception ex)
             {
