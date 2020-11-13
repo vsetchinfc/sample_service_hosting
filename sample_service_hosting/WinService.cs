@@ -1,4 +1,5 @@
 using System;
+using System.Runtime.Versioning;
 using System.ServiceProcess;
 using System.Threading;
 using System.Threading.Tasks;
@@ -12,16 +13,18 @@ namespace VSC
         private readonly TaskCompletionSource<object> _delayStart
             = new TaskCompletionSource<object>();
 
-        private IApplicationLifetime ApplicationLifetime { get; }
+        private IHostApplicationLifetime ApplicationLifetime { get; }
 
-        public WinService(IApplicationLifetime applicationLifetime)
+        [SupportedOSPlatform("windows")]
+        public WinService(IHostApplicationLifetime applicationLifetime)
         {
-            this.ServiceName = WinServiceName;
+            ServiceName = WinServiceName;
 
             ApplicationLifetime = applicationLifetime ??
                 throw new ArgumentNullException(nameof(applicationLifetime));
         }
 
+        [SupportedOSPlatform("windows")]
         public void Start()
         {
             try
@@ -38,12 +41,14 @@ namespace VSC
             this.OnStart(null);
         }
 
+        [SupportedOSPlatform("windows")]
         public Task StopAsync(CancellationToken cancellationToken)
         {
             Stop();
             return Task.CompletedTask;
         }
 
+        [SupportedOSPlatform("windows")]
         public Task WaitForStartAsync(CancellationToken cancellationToken)
         {
             cancellationToken.Register(() => _delayStart.TrySetCanceled());
@@ -56,13 +61,13 @@ namespace VSC
         protected override void OnStart(string[] args)
         {
             _delayStart.TrySetResult(null);
-            base.OnStart(args);
+            OnStart(args);
         }
 
         protected override void OnStop()
         {
             ApplicationLifetime.StopApplication();
-            base.OnStop();
+            OnStop();
         }
     }
 }

@@ -11,7 +11,7 @@ namespace VSC.Services
     {
         private CancellationTokenSource _cancellationTokenSource;
         private Task _executingTask;
-        // IApplicationLifetime _appLifetime;
+        // IHostApplicationLifetime _appLifetime;
         ILogger<SampleService> _logger;
         // IHostingEnvironment _environment;
         // IConfiguration _configuration;
@@ -20,7 +20,7 @@ namespace VSC.Services
             // IConfiguration configuration,
             // IHostingEnvironment environment,
             ILogger<SampleService> logger//, 
-            // IApplicationLifetime appLifetime
+                                         // IApplicationLifetime appLifetime
         )
         {
             // _configuration = configuration;
