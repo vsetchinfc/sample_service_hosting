@@ -11,113 +11,9 @@ namespace VSC
 {
     internal class HostedService
     {
-        private static NLog.Logger _logger
-            = NLog.LogManager.GetCurrentClassLogger();
+        internal static string[] Args { get; set; }
 
-        private ArgsParser _argsParser = null;
-
-        public HostedService(ArgsParser argsParser)
-        {
-            _argsParser = argsParser;
-        }
-
-        public async Task Run(string[] args)
-        {
-            if (_argsParser != null)
-            {
-                var builder = this.CreateHostBuilder(args);
-
-                if (builder == null) return;
-
-                WinServiceInstaller.APP_EXECUTABLE_PATH
-                    = Utility.GetExecutingAssemblyLocation()
-                        .Remove(
-                            Utility.GetExecutingAssemblyLocation().Length - 4
-                        ) + ".exe";
-
-                switch (_argsParser.GetHostAction())
-                {
-                    case HostAction.InstallWinService:
-                        {
-                            WinServiceInstaller
-                                .Install(WinService.WinServiceName);
-                        }
-                        break;
-                    case HostAction.UninstallWinService:
-                        {
-                            WinServiceInstaller
-                                .Uninstall(WinService.WinServiceName);
-                        }
-                        break;
-                    case HostAction.RunWinService:
-                        {
-                            try
-                            {
-                                await builder
-                                    .RunAsWindowsServiceAsync();
-                            }
-                            catch (Exception ex)
-                            {
-                                _logger.Error(
-                                        "Could not start as windows service. "
-                                        + ex.Message);
-                                ShowUsage();
-                            }
-                        }
-                        break;
-                    case HostAction.RunConsole:
-                        {
-                            try
-                            {
-                                await builder.RunConsoleAsync();
-                            }
-                            catch (Exception ex)
-                            {
-                                _logger.Error(
-                                    "Could not run as console app. "
-                                    + ex.Message);
-                                ShowUsage();
-                            }
-                        }
-                        break;
-                    case HostAction.RunLinuxDaemon:
-                        {
-                            try
-                            {
-                                await builder.Build().RunAsync();
-                            }
-                            catch (Exception ex)
-                            {
-                                _logger.Error(
-                                    "Could not start as Linux daemon service. "
-                                    + ex.Message);
-                                ShowUsage();
-                            }
-                        }
-                        break;
-                    default:
-                        {
-                            ShowUsage();
-                        }
-                        break;
-                }
-            }
-        }
-
-        private void ShowUsage()
-        {
-            Console.WriteLine(
-                string.Format("{0} [options]", WinService.WinServiceName)
-            );
-            Console.WriteLine("Options:\n"
-                        + "  'no options'\tStart as Windows Service\n"
-                        + "  -i\t\tInstall as Windows Service\n"
-                        + "  -u\t\tUninstall Windows Service\n"
-                        + "  -console\tRun as console app\n"
-                        + "  -daemon\tRun as Linux daemon service\n"
-                        + "  -h\t\tShow command line switch help\n");
-        }
-        private IHostBuilder CreateHostBuilder(string[] args)
+        internal static IHostBuilder CreateHostBuilder()//string[] args)
         {
             try
             {
@@ -130,7 +26,10 @@ namespace VSC
                         config.AddJsonFile(
                             $"appsettings.{hostingContext.HostingEnvironment.EnvironmentName}.json",
                             optional: true);
-                        config.AddCommandLine(args);
+                        if(Args != null) 
+                        {
+                            config.AddCommandLine(Args);
+                        }
                     })
                     .ConfigureServices((hostContext, services) =>
                     {

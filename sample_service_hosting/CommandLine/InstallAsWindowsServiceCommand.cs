@@ -13,7 +13,10 @@ namespace VSC.CommandLine
             CancellationToken cancellationToken = default
         )
         {
-            WinServiceInstaller.Install(WinService.WinServiceName);
+            await Task.Run(() => {
+                WinServiceInstaller.Install(WinService.WinServiceName);
+            });
+            
             return 0;
         }
     }
